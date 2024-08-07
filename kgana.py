@@ -125,8 +125,9 @@ class Screen(App):
             self.label_answer.update(" "*(3 * (len(self.to_show) - 1)) + HIRAGANA[self.to_show] + " " + KATAKANA[self.to_show])
             self.to_show = None
         else:
-            if self.idx + 1 == len(self.sequence):
+            if self.idx == len(self.sequence):
                 self.exit()
+                return
             kana = self.sequence[self.idx]
             self.label_query.update(large(kana))
             self.label_answer.update("")
