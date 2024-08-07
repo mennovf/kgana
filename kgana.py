@@ -1,7 +1,7 @@
 import itertools, random, os, sys
 from textual.app import App
 from textual.containers import Container
-from textual.widgets import Label
+from textual.widgets import Label, Footer
 from textual.reactive import reactive
 from textual.keys import Keys
 import art
@@ -101,6 +101,9 @@ class Screen(App):
         dock: left;
     }
     """
+
+    BINDINGS = [('q', 'quit', 'Quit')]
+
     def __init__(self, sequence):
         super().__init__()
         self.sequence = sequence
@@ -115,6 +118,7 @@ class Screen(App):
         yield self.label_progress
         yield self.label_query
         yield self.label_answer
+        yield Footer()
 
     def on_key(self, event: Keys) -> None:
         if self.to_show is not None:
