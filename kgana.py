@@ -7,7 +7,7 @@ from textual.keys import Keys
 import art
 
 VOWELS = ['a', 'e', 'i', 'o', 'u']
-CONSONANTS = ['k', 'r', 's', 't', 'm', 'n', 'h', 'y', 'w']
+CONSONANTS = ['k', 'r', 's', 't', 'm', 'n', 'h', 'y', 'w', '']
 
 EXCEPTIONS = {"ti": "chi", "si": "shi", "hu": "fu", "tu": "tsu"}
 
