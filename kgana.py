@@ -97,6 +97,9 @@ class Screen(App):
     #kanas {
         align: center middle;
     }
+    #progress {
+        dock: left;
+    }
     """
     def __init__(self, sequence):
         super().__init__()
@@ -105,8 +108,11 @@ class Screen(App):
 
         self.label_query = Label(large("KGANA"), id="romaji")
         self.label_answer = Label("", id="kanas")
+        self.label_progress = Label(f"0/{len(sequence)}", id="progress")
+        self.idx = 0
 
     def compose(self) -> Container:
+        yield self.label_progress
         yield self.label_query
         yield self.label_answer
 
@@ -115,10 +121,14 @@ class Screen(App):
             self.label_answer.update(" "*(3 * (len(self.to_show) - 1)) + HIRAGANA[self.to_show] + " " + KATAKANA[self.to_show])
             self.to_show = None
         else:
-            kana = self.sequence.pop()
+            if self.idx + 1 == len(self.sequence):
+                self.exit()
+            kana = self.sequence[self.idx]
             self.label_query.update(large(kana))
             self.label_answer.update("")
             self.to_show = kana
+            self.idx += 1
+            self.label_progress.update(f"{self.idx}/{len(self.sequence)}")
 
 if __name__ == "__main__":
     app = Screen(ALL)
